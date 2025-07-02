@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "569973363822",
+    "project_id": "greenland-b6c0c",
+    "storage_bucket": "greenland-b6c0c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569973363822:android:3d5d907a459a910edd027f",
+        "android_client_info": {
+          "package_name": "com.ayoub.greenlant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569973363822-hmdcqgoievo7fu49fkjsvg8me9sj1401.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayoub.greenlant",
+            "certificate_hash": "402421e2be554f195882384b64ac514e70166cbe"
+          }
+        },
+        {
+          "client_id": "569973363822-4npdflif4phujf6l9oqfmh5qcfqnn7jf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBblfFMboYiRf9fSS3jdTHXkAab3W9Bm2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569973363822-4npdflif4phujf6l9oqfmh5qcfqnn7jf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

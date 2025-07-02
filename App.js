@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Text, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, SafeAreaView, ScrollView, Text, StatusBar, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase/firebaseConfig';
 
 import AppHeader from './components/AppHeader';
 import WeatherWidget from './components/WeatherWidget';
@@ -9,7 +12,10 @@ import HumidityChart from './components/HumidityChart';
 import MapViewWidget from './components/MapViewWidget';
 import StatusCard from './components/StatusCard';
 import WaterButton from './components/WaterButton';
-import HelpScreen from './screens/HelpScreen'; // nouvelle page aide
+
+import HelpScreen from './screens/HelpScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,16 +24,10 @@ function MainScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* ESPACE HAUT POUR STATUS BAR */}
       <View style={{ marginTop: StatusBar.currentHeight || 40 }} />
-
-      {/* ENTÊTE */}
       <AppHeader />
-
-      {/* ESPACE POUR NE PAS CHEVAUCHER LES BOUTONS */}
       <View style={{ marginTop: 10 }} />
 
-      {/* CONTENU */}
       <ScrollView
         contentContainerStyle={styles.scroll}
         showsVerticalScrollIndicator={false}
@@ -48,7 +48,6 @@ function MainScreen() {
           onToggle={() => setWatering(!watering)}
         />
 
-        {/* PIED DE PAGE */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
             GreenLant est une application mobile intelligente de contrôle de système d’arrosage automatique. Elle fournit des données météorologiques, d’humidité, de localisation et permet l’arrosage manuel.
@@ -60,11 +59,39 @@ function MainScreen() {
 }
 
 export default function App() {
+  const [user, setUser] = useState(null);
+  const [initializing, setInitializing] = useState(true); // <- état d'initialisation
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setInitializing(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  if (initializing) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#2e7d32" />
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Help" component={HelpScreen} />
+        {user ? (
+          <>
+            <Stack.Screen name="Main" component={MainScreen} />
+            <Stack.Screen name="Help" component={HelpScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
