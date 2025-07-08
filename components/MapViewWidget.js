@@ -7,7 +7,7 @@ const MapViewWidget = () => {
 
   const getLocationFromESP32 = async () => {
     try {
-      const response = await fetch('http://192.168.11.137/location'); // ← Remplace par IP ESP32
+      const response = await fetch('http://192.168.71.187/location'); // ← Remplace par IP ESP32
       const data = await response.json();
       if (data.latitude && data.longitude) {
         setEsp32Location({
@@ -26,11 +26,12 @@ const MapViewWidget = () => {
   };
 
   const defaultRegion = {
-    latitude: 33.5731,
-    longitude: -7.5898,
+    latitude: 33.5452,
+    longitude: -7.6622,
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   };
+
 
   return (
     <View style={styles.container}>

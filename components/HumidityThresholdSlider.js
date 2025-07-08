@@ -6,7 +6,7 @@ export default function HumidityThresholdSlider({ threshold, setThreshold }) {
   const updateThresholdToESP32 = async (value) => {
     setThreshold(value);
     try {
-      const response = await fetch(`http://192.168.11.137/set-threshold?value=${value}`);
+      const response = await fetch(`http://192.168.71.187/set-threshold?value=${value}`);
       const text = await response.text();
       console.log('ESP32 dit :', text);
     } catch (error) {

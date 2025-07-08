@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
-const IP = '192.168.11.137';
+const IP = '192.168.71.187';
 
 const WaterButton = ({ isActive, onToggle }) => {
   const triggerWatering = async () => {
