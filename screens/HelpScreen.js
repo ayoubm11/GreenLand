@@ -4,11 +4,11 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 const HelpScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>À propos de GreenLant</Text>
+      <Text style={styles.title}>À propos de GreenLand</Text>
       <Text style={styles.content}>
-        GreenLant est une application mobile qui permet de contrôler un système d’arrosage automatique de manière intelligente.
+        GreenLand est une application mobile qui permet de contrôler un système d’arrosage automatique de manière intelligente.
         Elle fournit des données météorologiques en temps réel, affiche l'humidité de l’air sous forme de graphique, 
-        localise la position du dispositif Vibox GreenLant sur une carte, et permet aussi un arrosage manuel via un bouton dédié.
+        localise la position du dispositif Vibox GreenLand sur une carte, et permet aussi un arrosage manuel via un bouton dédié.
       </Text>
 
       <Text style={styles.subtitle}>Fonctionnalités principales :</Text>

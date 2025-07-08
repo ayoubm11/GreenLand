@@ -1,5 +1,6 @@
 // Import des fonctions Firebase nécessaires
 import { initializeApp } from "firebase/app";
+import 'firebase/auth';
 import { getAuth } from "firebase/auth";       // <-- Ajout de getAuth
 import { getAnalytics, isSupported } from "firebase/analytics";
 

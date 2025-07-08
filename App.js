@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Text, StatusBar, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase/firebaseConfig';
 
@@ -12,6 +11,7 @@ import HumidityChart from './components/HumidityChart';
 import MapViewWidget from './components/MapViewWidget';
 import StatusCard from './components/StatusCard';
 import WaterButton from './components/WaterButton';
+import HumidityThresholdSlider from './components/HumidityThresholdSlider'; 
 
 import HelpScreen from './screens/HelpScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -21,6 +21,17 @@ const Stack = createNativeStackNavigator();
 
 function MainScreen() {
   const [watering, setWatering] = useState(false);
+  const [rainTomorrow, setRainTomorrow] = useState(false); //pluie prévue
+  const [humidityThreshold, setHumidityThreshold] = useState(30); //seuil d'humidité
+
+  // Simulation météo : à remplacer par une vraie API plus tard
+  useEffect(() => {
+    const checkRainForecast = async () => {
+      const forecast = { weather: 'rain' }; // remplacer par API réelle plus tard
+      setRainTomorrow(forecast.weather === 'rain');
+    };
+    checkRainForecast();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,21 +47,52 @@ function MainScreen() {
         <WeatherWidget />
         <HumidityChart />
 
-        <Text style={styles.sectionTitle}>Localisation de Vibox GreenLant</Text>
+
+
+        <Text style={styles.sectionTitle}>Localisation de Vibox GreenLand</Text>
         <MapViewWidget />
 
-        <StatusCard status={watering ? "Arrosage actif" : "En attente"} />
-        <Text style={styles.subText}>
-          Cliquez sur le bouton pour démarrer l’arrosage manuel
-        </Text>
-        <WaterButton
-          isActive={watering}
-          onToggle={() => setWatering(!watering)}
+
+        {/* Réglage seuil d'humidité */}
+        <HumidityThresholdSlider
+          threshold={humidityThreshold}
+          setThreshold={setHumidityThreshold}
         />
+
+        {/* Statut d'arrosage */}
+        <StatusCard
+          status={
+            watering
+              ? "Arrosage actif"
+              : rainTomorrow
+              ? "Pluie prévue demain"
+              : "En attente"
+          }
+        />
+
+
+    {rainTomorrow && (
+      <Text style={[styles.subText, { color: '#c62828', fontWeight: 'bold' }]}>
+        Arrosage automatique désactivé : pluie prévue demain
+              </Text>
+    )}
+
+    <Text style={styles.subText}>
+      Cliquez sur le bouton pour démarrer l’arrosage manuel
+    </Text>
+
+    <WaterButton
+      isActive={watering}
+      onToggle={() => setWatering(!watering)}
+      disabled={false} // ne pas désactiver le bouton
+    />
+
+
+
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            GreenLant est une application mobile intelligente de contrôle de système d’arrosage automatique. Elle fournit des données météorologiques, d’humidité, de localisation et permet l’arrosage manuel.
+            GreenLand est une application mobile intelligente de contrôle de système d’arrosage automatique. Elle fournit des données météorologiques, d’humidité, de localisation et permet l’arrosage manuel.
           </Text>
         </View>
       </ScrollView>
@@ -60,7 +102,7 @@ function MainScreen() {
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [initializing, setInitializing] = useState(true); // <- état d'initialisation
+  const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
