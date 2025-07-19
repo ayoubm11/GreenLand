@@ -11,7 +11,7 @@ const HumidityChart = () => {
 
   const fetchHumidity = async () => {
     try {
-      const response = await fetch('http://192.168.71.187/humidity');
+      const response = await fetch('http://192.168.71.187/humidity'); // Remplacez par l'URL de votre ESP32
       const json = await response.json();
       const humidity = parseFloat(json.humidity);
 

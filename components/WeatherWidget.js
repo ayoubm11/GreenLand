@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
 
-const API_KEY = 'ae7111b18edbd8c86cdb3b44811f81ba'; // Clé OpenWeatherMap
+const API_KEY = 'ae1ba'; // Clé OpenWeatherMap
 const CITY = 'Casablanca';
 const COUNTRY = 'MA';
 

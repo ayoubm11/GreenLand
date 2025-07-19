@@ -1,18 +1,19 @@
 // Import des fonctions Firebase nécessaires
 import { initializeApp } from "firebase/app";
 import 'firebase/auth';
-import { getAuth } from "firebase/auth";       // <-- Ajout de getAuth
+import { getAuth } from "firebase/auth";      
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Configuration Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDiep_lAhy5pjIm8jpY9oDwZyTPzi-4eAk",
-  authDomain: "greenland-b6c0c.firebaseapp.com",
-  projectId: "greenland-b6c0c",
+  apiKey: "AI*****************Ak", // Remplacez par votre clé API
+  authDomain: "greenland-b6c0c.firebaseapp.com",  // Remplacez par votre domaine d'authentification
+  projectId: "greenland-b6c0c",  // Remplacez par votre ID de projet
   storageBucket: "greenland-b6c0c.firebasestorage.app",
-  messagingSenderId: "569973363822",
-  appId: "1:569973363822:web:6613371a402a74b4dd027f",
-  measurementId: "G-RWB1WVFB8Z"
+  messagingSenderId: "////////////////////////", // Remplacez par votre ID d'expéditeur de messages
+  appId: "//////////////", // Remplacez par votre ID d'application
+  measurementId: "////////////////////////7"  // Remplacez par votre ID de mesure
+  // Note: Assurez-vous de remplacer les valeurs par celles de votre projet Firebase
 };
 
 // Initialisation Firebase
