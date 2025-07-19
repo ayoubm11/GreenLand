@@ -8,8 +8,10 @@
 
 ---
 
-## 📸 Démo
-![Demo de l'application](demo/demo11.gif)
+## 🌟 Aperçu de l'application
+<p align="center">
+  <img src="demo/demo11.gif" alt="Démo de l'application" width="350"/>
+</p>
 
 
 ---
